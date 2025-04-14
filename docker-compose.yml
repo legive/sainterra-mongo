@@ -1,14 +1,29 @@
-version: '3'
+version: "3.8"
+
 services:
-  sainterra-mongo:  # Cambié el nombre del servicio a 'sainterra-mongo'
+  sainterra-api: # Contenedor de la API
     build: .
+    container_name: sainterra-api # Nombre del contenedor de la API
     ports:
-      - "3000:3000"
+      - "3000:3000" # Expone el puerto 3000 para la API
     depends_on:
-      - mongo
+      - mongo # Asegura que MongoDB se inicie antes que la API
     environment:
-      - MONGO_URI=mongodb://mongo:27017/sainterra
-  mongo:
-    image: mongo
+      - MONGO_URI=mongodb://mongo:27017/sainterra # Variable de entorno para la conexión con MongoDB
+    networks:
+      - node-network # Conexión a la red
+
+  mongo: # Contenedor de MongoDB
+    image: mongo:latest
+    container_name: mongo # Nombre del contenedor de MongoDB
     ports:
-      - "27017:27017"
+      - "27017:27017" # Expone el puerto de MongoDB
+    volumes:
+      - ./init-mongodb:/docker-entrypoint-initdb.d # Inicialización de datos
+      - ./init-mongodb/data:/tmp/data # Persistencia de datos
+    networks:
+      - node-network # Conexión a la red
+
+networks:
+  node-network:
+    driver: bridge # Red de contenedores para permitir la comunicación

@@ -1,6 +1,8 @@
-// middlewares/validateUser.js
-
 module.exports = (req, res, next) => {
+    if (!req.body) {
+        return res.status(400).json({ error: 'El cuerpo de la solicitud está vacío' });
+    }
+
     const { first_name, last_name, email, gender, address, card, married_status } = req.body;
 
     if (!first_name || !last_name || !email || !gender || !address || !card || married_status === undefined) {

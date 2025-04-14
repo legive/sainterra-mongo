@@ -1,3 +1,4 @@
+const mongoose = require('mongoose'); // Asegúrate de importar mongoose si usas MongoDB
 const User = require('../models/userModel');
 
 // Función para obtener todos los usuarios
@@ -10,7 +11,30 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+// Función para obtener un usuario por su ID
+const getUserById = async (req, res) => {
+    const userId = req.params.id; // Obtiene el ID desde los parámetros de la URL
 
+    // Validar si el ID es un ObjectId válido (para MongoDB)
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ error: 'ID de usuario no válido' });
+    }
+
+    try {
+        const user = await User.findById(userId); // Busca el usuario por ID
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' }); // Si no se encuentra, devuelve un error 404
+        }
+
+        res.status(200).json(user); // Si se encuentra el usuario, devuelve los datos
+    } catch (err) {
+        res.status(500).json({ 
+            error: 'Error al obtener el usuario', 
+            details: err.message // Incluye detalles del error para depuración
+        });
+    }
+};
 
 const updateUserById = async (req, res) => {
     const userId = req.params.id;
@@ -36,8 +60,6 @@ const updateUserById = async (req, res) => {
     }
 };
 
-
-
 // Función para eliminar un usuario por ID
 const deleteUserById = async (req, res) => {
     const userId = req.params.id;
@@ -57,6 +79,7 @@ const deleteUserById = async (req, res) => {
 
 module.exports = {
     getAllUsers,
+    getUserById,
     updateUserById,
     deleteUserById
 };
