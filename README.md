@@ -26,7 +26,7 @@ Si prefieres usar Docker, sigue estos pasos:
     cd tu_repositorio
     ```
 
-2.**Levanta los contenedores con Docker Compose**:
+2. **Levanta los contenedores con Docker Compose**:
     Si usas `docker-compose.yml` para levantar MongoDB y la API:
     ```bash
     docker-compose up --build
