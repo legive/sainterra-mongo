@@ -32,7 +32,7 @@ Si prefieres usar Docker, sigue estos pasos:
     docker-compose up --build
     ```
 
-4. **Accede a la API**:
+3. **Accede a la API**:
     La API estará disponible en **`http://localhost:3000`**.
 
 ### Sin Docker
