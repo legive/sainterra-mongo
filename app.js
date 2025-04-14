@@ -13,7 +13,12 @@ const app = express();
 // Middleware para parsear JSON
 app.use(express.json());
 
-// Usar las rutas
+// Ruta para la página principal (raíz)
+app.get('/', (req, res) => {
+    res.send('¡Bienvenido a la API de SAINTERRA!');
+});
+
+// Usar las rutas de usuarios
 app.use('/users', userRoutes);
 
 // Iniciar el servidor
