@@ -1,0 +1,27 @@
+{
+  "name": "sainterra-mongo",
+  "version": "1.0.0",
+  "description": "actividad 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legive/sainterra-mongo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legive/sainterra-mongo/issues"
+  },
+  "homepage": "https://github.com/legive/sainterra-mongo#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
